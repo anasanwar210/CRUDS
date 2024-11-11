@@ -16,28 +16,28 @@ body {
   animation: fadeIn 1s ease-in-out;
 }
 
-h2 {
+#addNewItem h2 {
   color: #00796b;
   animation: slideDown 1s ease-in-out;
 }
 
-h3 {
+#addNewItem h3 {
   color: #004d40;
   animation: slideDown 1s ease-in-out;
 }
 
-.card {
+#addNewItem .card {
   margin-bottom: 20px;
   border-radius: 12px;
   animation: slideIn 1s ease-in-out;
 }
 
-.card-header {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+#addNewItem .card-header {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
-.item-row {
+#addNewItem .item-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,18 +49,23 @@ h3 {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.item-row:hover {
+#addNewItem .item-row:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.btn-success {
+#addNewItem textarea{
+  height: 150px;
+  resize: none;
+}
+
+#addNewItem .btn-success {
   background-color: #388e3c;
   border-color: #388e3c;
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-.btn-success:hover {
+#addNewItem .btn-success:hover {
   background-color: #2e7d32;
   border-color: #2e7d32;
 }
@@ -131,6 +136,7 @@ h3 {
   background-color: #0056b3;
   border-color: #004085;
 }
+
 
 @keyframes slide_In {
   from { transform: translateY(20px); opacity: 0; }

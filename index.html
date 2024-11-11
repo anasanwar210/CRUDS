@@ -13,29 +13,33 @@
 </head>
 
 <body>
-  <div class="container mt-5">
-    <h2 class="text-center mb-4 text-primary">Stylish CRUD Interface</h2>
+  <div id="addNewItem" class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">CRUDS Interface</h2>
     <div class="card shadow-sm rounded">
       <div class="card-header bg-success text-white"> Add New Item </div>
       <div class="card-body">
         <div>
-          <div class="mb-3">
-            <label for="itemName" class="form-label">Item Name</label>
-            <input type="text" class="form-control" id="itemName" required>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="productNameInput" placeholder="Product Name">
+            <label for="productNameInput">Product Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control" id="productPriceInput" placeholder="Product Price">
+            <label for="productPriceInput">Product Price</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="productCatInput" placeholder="Product Category">
+            <label for="productCatInput">Product Category</label>
           </div>
           <div class="mb-3">
-            <label for="itemName" class="form-label">Item Name</label>
-            <input type="text" class="form-control" id="itemName" required>
+            <label for="fileInput" class="form-label">Product Image</label>
+            <input class="form-control" type="file" id="fileInput">
           </div>
-          <div class="mb-3">
-            <label for="itemName" class="form-label">Item Name</label>
-            <input type="text" class="form-control" id="itemName" required>
+          <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Product Description" id="productDescInput"></textarea>
+            <label for="productDescInput">Description</label>
           </div>
-          <div class="mb-3">
-            <label for="itemName" class="form-label">Item Name</label>
-            <input type="text" class="form-control" id="itemName" required>
-          </div>
-          <button type="submit" class="btn btn-outline-success w-100">Add Item</button>
+          <button type="submit" class="btn btn-success w-100">Add Item</button>
         </div>
       </div>
     </div>
@@ -45,28 +49,29 @@
     <input type="text" class="form-control" id="itemName" placeholder="search">
   </div>
 
-  <div class="container">
+  <div id="itemsList" class="container">
     <div class="mt-4">
       <h3 class="text-secondary">Items List</h3>
       <div id="itemList">
         <div class="item-row row p-3 mb-3 rounded bg-light shadow-sm">
-          <div class="col-md-3 align-items-center py-4">
+          <div class="col-md-4 align-items-center py-4">
             <div class="card product-card shadow-lg rounded">
               <img src="images/1.jpg" class="card-img-top" alt="Product Image">
               <div class="card-body">
-                <h5 class="card-title">Samsung</h5>
-                <h6 class="card-subtitle mb-2 text-muted">2000</h6>
-                <p class="card-text">
-                  <Span>Category: </Span>
+                <h5 class="card-title"><Span class="fw-bold">Type: </Span> Samsung</h5>
+                <p class="card-text mb-2">
+                  <Span class="fw-bold">Category: </Span>
                   Mobile
                 </p>
                 <p class="card-text">
+                  <Span class="fw-bold">Description: </Span>
                   Good
                 </p>
-                <div class="btns d-flex justify-content-evenly align-items-center">
-                  <button href="#" class="btn btn-primary">Edit</button>
-                  <button href="#" class="btn btn-danger">Delete</button>
-                </div>
+                <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> 2000</h6>
+              </div>
+              <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
+                <button href="#" class="btn btn-primary py-2 px-5">Edit</button>
+                <button href="#" class="btn btn-danger py-2 px-5">Delete</button>
               </div>
             </div>
           </div>
