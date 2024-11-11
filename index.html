@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="images/quote-right-solid.svg" type="image/x-icon">
+  <link rel="stylesheet" href="css/all.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/media.css">
+  <title>CRUDS</title>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <h2 class="text-center mb-4 text-primary">Stylish CRUD Interface</h2>
+    <div class="card shadow-sm rounded">
+      <div class="card-header bg-success text-white"> Add New Item </div>
+      <div class="card-body">
+        <div>
+          <div class="mb-3">
+            <label for="itemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="itemName" required>
+          </div>
+          <div class="mb-3">
+            <label for="itemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="itemName" required>
+          </div>
+          <div class="mb-3">
+            <label for="itemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="itemName" required>
+          </div>
+          <div class="mb-3">
+            <label for="itemName" class="form-label">Item Name</label>
+            <input type="text" class="form-control" id="itemName" required>
+          </div>
+          <button type="submit" class="btn btn-outline-success w-100">Add Item</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="my-5 col-6 m-auto">
+    <input type="text" class="form-control" id="itemName" placeholder="search">
+  </div>
+
+  <div class="container">
+    <div class="mt-4">
+      <h3 class="text-secondary">Items List</h3>
+      <div id="itemList">
+        <div class="item-row row p-3 mb-3 rounded bg-light shadow-sm">
+          <div class="col-md-3 align-items-center py-4">
+            <div class="card product-card shadow-lg rounded">
+              <img src="images/1.jpg" class="card-img-top" alt="Product Image">
+              <div class="card-body">
+                <h5 class="card-title">Samsung</h5>
+                <h6 class="card-subtitle mb-2 text-muted">2000</h6>
+                <p class="card-text">
+                  <Span>Category: </Span>
+                  Mobile
+                </p>
+                <p class="card-text">
+                  Good
+                </p>
+                <div class="btns d-flex justify-content-evenly align-items-center">
+                  <button href="#" class="btn btn-primary">Edit</button>
+                  <button href="#" class="btn btn-danger">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="js/all.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>
