@@ -32,14 +32,14 @@
             <label for="productCatInput">Product Category</label>
           </div>
           <div class="mb-3">
-            <label for="fileInput" class="form-label">Product Image</label>
-            <input class="form-control" type="file" id="fileInput">
+            <label for="imageInput" class="form-label">Product Image</label>
+            <input class="form-control" type="file" id="imageInput">
           </div>
           <div class="form-floating mb-3">
-            <textarea class="form-control" placeholder="Product Description" id="productDescInput"></textarea>
+            <textarea class="form-control" id="productDescInput" placeholder="Product Description"></textarea>
             <label for="productDescInput">Description</label>
           </div>
-          <button type="submit" class="btn btn-success w-100">Add Item</button>
+          <button type="submit" class="btn btn-success w-100" onclick="addProduct()">Add Item</button>
         </div>
       </div>
     </div>
@@ -53,28 +53,7 @@
     <div class="mt-4">
       <h3 class="text-secondary">Items List</h3>
       <div id="itemList">
-        <div class="item-row row p-3 mb-3 rounded bg-light shadow-sm">
-          <div class="col-md-4 align-items-center py-4">
-            <div class="card product-card shadow-lg rounded">
-              <img src="images/1.jpg" class="card-img-top" alt="Product Image">
-              <div class="card-body">
-                <h5 class="card-title"><Span class="fw-bold">Type: </Span> Samsung</h5>
-                <p class="card-text mb-2">
-                  <Span class="fw-bold">Category: </Span>
-                  Mobile
-                </p>
-                <p class="card-text">
-                  <Span class="fw-bold">Description: </Span>
-                  Good
-                </p>
-                <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> 2000</h6>
-              </div>
-              <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
-                <button href="#" class="btn btn-primary py-2 px-5">Edit</button>
-                <button href="#" class="btn btn-danger py-2 px-5">Delete</button>
-              </div>
-            </div>
-          </div>
+        <div id="productsData" class="row item-row p-3 mb-3 rounded bg-light shadow-sm">
         </div>
       </div>
     </div>
