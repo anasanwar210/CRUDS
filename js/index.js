@@ -74,7 +74,7 @@ function updateItem() {
 // [ 5 ]
 function deleteItem(index) {
   productsContainer.splice(index, 1);
-  localStorage.setItem('products' , JSON.stringify(productsContainer))
+  localStorage.setItem("products", JSON.stringify(productsContainer));
   display();
   console.log(productsContainer[index]);
 }
