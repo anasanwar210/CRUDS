@@ -49,8 +49,15 @@
   </div>
 
   <div class="container">
-    <div class="my-5 col-md-8 m-auto">
-      <input type="text" class="form-control" id="itemName" placeholder="search">
+    <div class="row my-5 m-auto">
+      <div class="col-md-8 mb-2">
+        <input type="text" class="form-control" id="searchInput" placeholder="Search" oninput="search()">
+      </div>
+      <div class="col-md-4 mb-2">
+        <select oninput="getCategory()" id="selectCategory" class="form-select" aria-label="Default select example">
+          
+        </select>
+      </div>
     </div>
   </div>
 

@@ -4,6 +4,10 @@ let productNameInput = document.getElementById("productNameInput"),
   productDescInput = document.getElementById("productDescInput"),
   imageInput = document.getElementById("imageInput");
 
+let searchInput = document.getElementById("searchInput"),
+  selectCategory = document.getElementById("selectCategory"),
+  opt = document.getElementById("opt");
+
 let confirmUpdateBtn = document.getElementById("confirmUpdate"),
   addItemBtn = document.getElementById("addItem");
 
@@ -11,6 +15,7 @@ let productsContainer = [];
 
 if (localStorage.getItem("products") !== null) {
   productsContainer = JSON.parse(localStorage.getItem("products"));
+  appendCategory();
   display();
 }
 
@@ -28,6 +33,7 @@ function addProduct() {
   clearInputs();
   display();
   console.log(productsContainer);
+  location.reload();
 }
 
 // [ 2 ]
@@ -44,19 +50,19 @@ function display() {
   let products = ``;
   for (let i = 0; i < productsContainer.length; i++) {
     products += `
-          <div class="col-md-4 align-items-center py-4">
-            <div class="card product-card shadow-lg rounded">
+    <div class="col-md-4 align-items-center py-4">
+    <div class="card product-card shadow-lg rounded">
               <img src="images/1.jpg" class="card-img-top" alt="Product Image">
               <div class="card-body">
-                <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
-                <p class="card-text mb-2">
-                  <Span class="fw-bold">Category: </Span>
-                  ${productsContainer[i].productCat}
-                </p>
+              <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
+              <p class="card-text mb-2">
+              <Span class="fw-bold">Category: </Span>
+              ${productsContainer[i].productCat}
+              </p>
                 <p class="card-text">
                   <Span class="fw-bold">Description: </Span>
                   ${productsContainer[i].productDesc}
-                </p>
+                  </p>
                 <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
               </div>
               <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
@@ -83,6 +89,7 @@ function updateItem(index) {
   display();
   confirmUpdateBtn.classList.remove("d-none");
   addItemBtn.classList.add("d-none");
+  getCategory();
 }
 
 // [ 4.1 ]
@@ -92,12 +99,13 @@ function confirmUpdate() {
   productsContainer[productIndex].productPrice = productPriceInput.value;
   productsContainer[productIndex].productCat = productCatInput.value;
   productsContainer[productIndex].productDesc = productDescInput.value;
-
   localStorage.setItem("products", JSON.stringify(productsContainer));
   display();
   clearInputs();
   confirmUpdateBtn.classList.add("d-none");
   addItemBtn.classList.remove("d-none");
+  location.reload();
+  getCategory();
 }
 
 // [ 5 ]
@@ -106,4 +114,96 @@ function deleteItem(index) {
   localStorage.setItem("products", JSON.stringify(productsContainer));
   display();
   console.log(productsContainer[index]);
+  location.reload();
+  getCategory();
 }
+
+// [ 6 ]
+function search() {
+  let products = ``;
+
+  for (let i = 0; i < productsContainer.length; i++) {
+    if (
+      productsContainer[i].productCat
+        .toLowerCase()
+        .includes(searchInput.value.toLowerCase())
+    ) {
+      products += `
+      <div class="col-md-4 align-items-center py-4">
+      <div class="card product-card shadow-lg rounded">
+      <img src="images/1.jpg" class="card-img-top" alt="Product Image">
+          <div class="card-body">
+          <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
+          <p class="card-text mb-2">
+          <Span class="fw-bold">Category: </Span>
+          ${productsContainer[i].productCat}
+            </p>
+            <p class="card-text">
+              <Span class="fw-bold">Description: </Span>
+              ${productsContainer[i].productDesc}
+            </p>
+            <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
+          </div>
+          <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
+          <button href="#" class="btn btn-primary py-2 px-5" onclick="updateItem(${i})">Update</button>
+            <button href="#" class="btn btn-danger py-2 px-5" onclick="deleteItem(${i})">Delete</button>
+          </div>
+        </div>
+      </div>
+      `;
+    }
+  }
+  document.getElementById("productsData").innerHTML = products;
+}
+
+function appendCategory() {
+  let cat = ``,
+    uniqueCategory = [];
+  for (let i = 0; i < productsContainer.length; i++) {
+    if (uniqueCategory.indexOf(productsContainer[i].productCat) == -1) {
+      uniqueCategory.push(productsContainer[i].productCat);
+      cat += `
+      <option id="opt" class="opt" value="${productsContainer[i].productCat}">${productsContainer[i].productCat}</option>
+      `;
+    }
+  }
+
+  selectCategory.innerHTML = cat;
+}
+
+console.log(selectCategory.value);
+
+function getCategory() {
+  let products = ``;
+  for (let i = 0; i < productsContainer.length; i++) {
+    if (selectCategory.value === productsContainer[i].productCat) {
+      console.log(selectCategory.value);
+      console.log(productsContainer[i].productCat);
+      products += `
+      <div class="col-md-4 align-items-center py-4">
+      <div class="card product-card shadow-lg rounded">
+      <img src="images/1.jpg" class="card-img-top" alt="Product Image">
+          <div class="card-body">
+          <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
+          <p class="card-text mb-2">
+          <Span class="fw-bold">Category: </Span>
+          ${productsContainer[i].productCat}
+            </p>
+            <p class="card-text">
+              <Span class="fw-bold">Description: </Span>
+              ${productsContainer[i].productDesc}
+            </p>
+            <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
+          </div>
+          <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
+          <button href="#" class="btn btn-primary py-2 px-5" onclick="updateItem(${i})">Update</button>
+            <button href="#" class="btn btn-danger py-2 px-5" onclick="deleteItem(${i})">Delete</button>
+          </div>
+        </div>
+      </div>
+      `;
+    }
+  }
+  document.getElementById("productsData").innerHTML = products;
+}
+
