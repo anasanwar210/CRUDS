@@ -54,7 +54,7 @@ function display() {
     <div class="card product-card shadow-lg rounded">
               <img src="images/1.jpg" class="card-img-top" alt="Product Image">
               <div class="card-body">
-              <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
+              <h2 class="h5 card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h2>
               <p class="card-text mb-2">
               <Span class="fw-bold">Category: </Span>
               ${productsContainer[i].productCat}
@@ -63,10 +63,10 @@ function display() {
                   <Span class="fw-bold">Description: </Span>
                   ${productsContainer[i].productDesc}
                   </p>
-                <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
+                <h3 class="h6 card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h3>
               </div>
               <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
-                <button href="#" class="btn btn-primary py-2 px-5" onclick="updateItem(${i})">Update</button>
+                <button href="#" class="btn btn-success py-2 px-5" onclick="updateItem(${i})">Update</button>
                 <button href="#" class="btn btn-danger py-2 px-5" onclick="deleteItem(${i})">Delete</button>
               </div>
             </div>
@@ -121,10 +121,9 @@ function deleteItem(index) {
 // [ 6 ]
 function search() {
   let products = ``;
-
   for (let i = 0; i < productsContainer.length; i++) {
     if (
-      productsContainer[i].productCat
+      productsContainer[i].productName
         .toLowerCase()
         .includes(searchInput.value.toLowerCase())
     ) {
@@ -151,8 +150,23 @@ function search() {
         </div>
       </div>
       `;
+    } else if (
+      productsContainer[i].productName
+        .toLowerCase()
+        .includes(searchInput.value.toLowerCase()) === false
+    ) {
+      products += `
+        <div id="notFound">
+          <div class="container mt-5 text-center">
+          <div class="not-found-card">
+            <h2 class="text-primary">Product Not Found</h2>
+            <p class="lead text-secondary text-capitalize">we couldn't find the product you're looking for.</p>
+          </div>
+        </div>
+          `;
     }
   }
+
   document.getElementById("productsData").innerHTML = products;
 }
 
@@ -170,8 +184,6 @@ function appendCategory() {
 
   selectCategory.innerHTML = cat;
 }
-
-console.log(selectCategory.value);
 
 function getCategory() {
   let products = ``;
@@ -206,4 +218,3 @@ function getCategory() {
   }
   document.getElementById("productsData").innerHTML = products;
 }
-
