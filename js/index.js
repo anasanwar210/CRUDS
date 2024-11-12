@@ -1,3 +1,6 @@
+alert("Fix Search When No Items")
+
+
 let productNameInput = document.getElementById("productNameInput"),
   productPriceInput = document.getElementById("productPriceInput"),
   productCatInput = document.getElementById("productCatInput"),
