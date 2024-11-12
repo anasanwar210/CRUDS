@@ -1,4 +1,4 @@
-alert("Fix Search When No Items")
+alert("Fix Search When No Items => search method()")
 
 
 let productNameInput = document.getElementById("productNameInput"),
