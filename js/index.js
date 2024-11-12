@@ -65,9 +65,9 @@ function display() {
                   </p>
                 <h3 class="h6 card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h3>
               </div>
-              <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
-                <button href="#" class="btn btn-success py-2 px-5" onclick="updateItem(${i})">Update</button>
-                <button href="#" class="btn btn-danger py-2 px-5" onclick="deleteItem(${i})">Delete</button>
+              <div class="btns mb-4 d-flex justify-content-evenly align-items-center d-flex flex-column">
+                <button href="#" class="btn btn-success mb-2 py-2 px-5 w-75" onclick="updateItem(${i})">Update</button>
+                <button href="#" class="btn btn-danger m py-2 px-5 w-75" onclick="deleteItem(${i})">Delete</button>
               </div>
             </div>
           </div>
