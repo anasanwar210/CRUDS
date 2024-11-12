@@ -11,6 +11,8 @@ let searchInput = document.getElementById("searchInput"),
 let confirmUpdateBtn = document.getElementById("confirmUpdate"),
   addItemBtn = document.getElementById("addItem");
 
+let productIndex, beforeDeleted;
+
 let productsContainer = [];
 
 if (localStorage.getItem("products") !== null) {
@@ -22,11 +24,27 @@ if (localStorage.getItem("products") !== null) {
 // [ 1 ]
 function addProduct() {
   let product = {
-    productName: productNameInput.value,
-    productPrice: productPriceInput.value,
-    productCat: productCatInput.value,
-    productDesc: productDescInput.value,
-    image: "",
+    productName: productNameInput.value
+      .trim()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+    productPrice: productPriceInput.value
+      .trim()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+    productCat: productCatInput.value
+      .trim()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+    productDesc: productDescInput.value
+      .trim()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" "),
+    image: `images/sam_m54.webp`,
   };
   productsContainer.push(product);
   localStorage.setItem("products", JSON.stringify(productsContainer));
@@ -50,9 +68,11 @@ function display() {
   let products = ``;
   for (let i = 0; i < productsContainer.length; i++) {
     products += `
-    <div class="col-md-4 align-items-center py-4">
+    <div class="col-md-6 col-lg-4 align-items-center py-4">
     <div class="card product-card shadow-lg rounded">
-              <img src="images/1.jpg" class="card-img-top" alt="Product Image">
+              <picture>
+                <img src="${productsContainer[i].image}" class="card-img-top" alt="Product Image w-100">
+              </picture>
               <div class="card-body">
               <h2 class="h5 card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h2>
               <p class="card-text mb-2">
@@ -63,11 +83,11 @@ function display() {
                   <Span class="fw-bold">Description: </Span>
                   ${productsContainer[i].productDesc}
                   </p>
-                <h3 class="h6 card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h3>
+                <h3 class="h6 card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> $${productsContainer[i].productPrice}</h3>
               </div>
-              <div class="btns mb-4 d-flex justify-content-evenly align-items-center d-flex flex-column">
-                <button href="#" class="btn btn-success mb-2 py-2 px-5 w-75" onclick="updateItem(${i})">Update</button>
-                <button href="#" class="btn btn-danger m py-2 px-5 w-75" onclick="deleteItem(${i})">Delete</button>
+              <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
+                <button href="#" class="btn btn-success m-2 py-2 px-5 w-75" onclick="updateItem(${i})">Update</button>
+                <button href="#" class="btn btn-danger m-2 py-2 px-5 w-75" onclick="deleteItem(${i})">Delete</button>
               </div>
             </div>
           </div>
@@ -77,7 +97,6 @@ function display() {
 }
 
 // [ 4 ]
-let productIndex, beforeDeleted;
 function updateItem(index) {
   productIndex = index;
   beforeDeleted = productsContainer[index];
@@ -128,9 +147,11 @@ function search() {
         .includes(searchInput.value.toLowerCase())
     ) {
       products += `
-      <div class="col-md-4 align-items-center py-4">
+      <div class="col-md-6 col-lg-4 align-items-center py-4">
       <div class="card product-card shadow-lg rounded">
-      <img src="images/1.jpg" class="card-img-top" alt="Product Image">
+          <picture>
+            <img src="${productsContainer[i].image}" class="card-img-top" alt="Product Image w-100">
+          </picture>
           <div class="card-body">
           <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
           <p class="card-text mb-2">
@@ -144,27 +165,28 @@ function search() {
             <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
           </div>
           <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
-          <button href="#" class="btn btn-primary py-2 px-5" onclick="updateItem(${i})">Update</button>
-            <button href="#" class="btn btn-danger py-2 px-5" onclick="deleteItem(${i})">Delete</button>
+          <button href="#" class="btn btn-primary m-2 py-2 px-5" onclick="updateItem(${i})">Update</button>
+            <button href="#" class="btn btn-danger m-2 py-2 px-5" onclick="deleteItem(${i})">Delete</button>
           </div>
         </div>
       </div>
       `;
-    } else if (
-      productsContainer[i].productName
-        .toLowerCase()
-        .includes(searchInput.value.toLowerCase()) === false
-    ) {
-      products += `
-        <div id="notFound">
-          <div class="container mt-5 text-center">
-          <div class="not-found-card">
-            <h2 class="text-primary">Product Not Found</h2>
-            <p class="lead text-secondary text-capitalize">we couldn't find the product you're looking for.</p>
-          </div>
-        </div>
-          `;
     }
+    // else if (
+    //   productsContainer[i].productName
+    //     .toLowerCase()
+    //     .includes(searchInput.value.toLowerCase()) == 0
+    // ) {
+    //   products += `
+    //     <div id="notFound">
+    //       <div class="container mt-5 text-center">
+    //       <div class="not-found-card">
+    //         <h2 class="text-primary">Product Not Found</h2>
+    //         <p class="lead text-secondary text-capitalize">we couldn't find the product you're looking for.</p>
+    //       </div>
+    //     </div>
+    //       `;
+    // }
   }
 
   document.getElementById("productsData").innerHTML = products;
@@ -192,20 +214,22 @@ function getCategory() {
       console.log(selectCategory.value);
       console.log(productsContainer[i].productCat);
       products += `
-      <div class="col-md-4 align-items-center py-4">
+      <div class="col-md-6 col-lg-4 align-items-center py-4">
       <div class="card product-card shadow-lg rounded">
-      <img src="images/1.jpg" class="card-img-top" alt="Product Image">
+        <picture>
+          <img src="${productsContainer[i].image}" class="card-img-top" alt="Product Image w-100">
+        </picture>
           <div class="card-body">
-          <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
-          <p class="card-text mb-2">
-          <Span class="fw-bold">Category: </Span>
-          ${productsContainer[i].productCat}
-            </p>
-            <p class="card-text">
-              <Span class="fw-bold">Description: </Span>
-              ${productsContainer[i].productDesc}
-            </p>
-            <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
+            <h5 class="card-title"><Span class="fw-bold">Type: </Span> ${productsContainer[i].productName}</h5>
+            <p class="card-text mb-2">
+            <Span class="fw-bold">Category: </Span>
+            ${productsContainer[i].productCat}
+              </p>
+              <p class="card-text">
+                <Span class="fw-bold">Description: </Span>
+                ${productsContainer[i].productDesc}
+              </p>
+              <h6 class="card-subtitle mb-2 text-muted"><Span class="fw-bold">Price: </Span> ${productsContainer[i].productPrice}</h6>
           </div>
           <div class="btns mb-4 d-flex justify-content-evenly align-items-center">
           <button href="#" class="btn btn-primary py-2 px-5" onclick="updateItem(${i})">Update</button>

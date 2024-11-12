@@ -127,11 +127,11 @@ body {
   box-shadow: none;
   animation: slide_In 1s ease-in-out;
 }
-
+/* 
 .card-img-top {
   height: 200px;
   object-fit: cover;
-}
+} */
 
 .card-title {
   color: #343a40;
@@ -188,14 +188,14 @@ body {
 h2 {
   margin-bottom: 20px;
 }
-
+/* 
 #productsData #notFound{
   display: none;
 }
 
 #productsData > #notFound{
   display: block;
-}
+} */
 
 /* 
 ===============================================
