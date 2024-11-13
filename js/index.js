@@ -1,5 +1,4 @@
-alert("Fix Search When No Items => search method()")
-
+// alert("Fix Search When No Items => search method()")
 
 let productNameInput = document.getElementById("productNameInput"),
   productPriceInput = document.getElementById("productPriceInput"),
@@ -175,21 +174,17 @@ function search() {
       </div>
       `;
     }
-    // else if (
-    //   productsContainer[i].productName
-    //     .toLowerCase()
-    //     .includes(searchInput.value.toLowerCase()) == 0
-    // ) {
-    //   products += `
-    //     <div id="notFound">
-    //       <div class="container mt-5 text-center">
-    //       <div class="not-found-card">
-    //         <h2 class="text-primary">Product Not Found</h2>
-    //         <p class="lead text-secondary text-capitalize">we couldn't find the product you're looking for.</p>
-    //       </div>
-    //     </div>
-    //       `;
-    // }
+  }
+  if (products == "") {
+    products += `
+        <div id="notFound">
+          <div class="container mt-5 text-center">
+          <div class="not-found-card">
+            <h2 class="text-primary">Product Not Found</h2>
+            <p class="lead text-secondary text-capitalize">we couldn't find the product you're looking for.</p>
+          </div>
+        </div>
+          `;
   }
 
   document.getElementById("productsData").innerHTML = products;
@@ -207,7 +202,7 @@ function appendCategory() {
     }
   }
 
-  selectCategory.innerHTML = cat;
+  selectCategory.innerHTML += cat;
 }
 
 function getCategory() {
