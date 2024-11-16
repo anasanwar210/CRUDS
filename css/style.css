@@ -127,11 +127,6 @@ body {
   box-shadow: none;
   animation: slide_In 1s ease-in-out;
 }
-/* 
-.card-img-top {
-  height: 200px;
-  object-fit: cover;
-} */
 
 .card-title {
   color: #343a40;
@@ -151,6 +146,14 @@ body {
   background-color: #0056b3;
   border-color: #004085;
 }
+
+#productsData .product-card picture img{
+  height: 250px;
+  width: 100%;
+  object-fit: contain;
+}
+
+
 
 @keyframes slide_In {
   from {
@@ -188,14 +191,7 @@ body {
 h2 {
   margin-bottom: 20px;
 }
-/* 
-#productsData #notFound{
-  display: none;
-}
 
-#productsData > #notFound{
-  display: block;
-} */
 
 /* 
 ===============================================
