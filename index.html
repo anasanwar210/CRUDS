@@ -21,27 +21,29 @@
       <div class="card-body">
         <div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productNameInput" placeholder="Product Name">
+            <input type="text" class="change form-control" id="productNameInput" placeholder="Product Name">
             <label for="productNameInput">Product Name</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="number" class="form-control" id="productPriceInput" placeholder="Product Price">
+            <input type="number" class="change form-control" id="productPriceInput" placeholder="Product Price">
             <label for="productPriceInput">Product Price</label>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="productCatInput" placeholder="Product Category">
+            <input type="text" class="change form-control" id="productCatInput" placeholder="Product Category">
             <label for="productCatInput">Product Category</label>
           </div>
           <div class="mb-3">
             <label for="imageInput" class="form-label">Product Image</label>
-            <input class="form-control" type="file" id="imageInput">
+            <input class="change form-control" type="file" id="imageInput">
           </div>
           <div class="form-floating mb-3">
-            <textarea class="form-control" id="productDescInput" placeholder="Product Description"></textarea>
+            <textarea class="change form-control" id="productDescInput" placeholder="Product Description"></textarea>
             <label for="productDescInput">Description</label>
           </div>
           <button id="confirmUpdate" type="submit" class="btn btn-warning py-2 mb-2 w-100 d-none"
-            onclick="confirmUpdate()">Update Item</button>
+            onclick="confirmUpdate()" disabled>Update Item</button>
+            <button id="cancelUpdateBtn" type="submit" class="btn btn-danger py-2 mb-2 w-100 d-none"
+            onclick="confirmUpdate()">Cancel</button>
           <button id="addItem" type="submit" class="btn btn-success py-2 w-100" onclick="addProduct()">Add
             Item</button>
         </div>
