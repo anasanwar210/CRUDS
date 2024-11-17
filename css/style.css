@@ -136,15 +136,8 @@ body {
   color: #6c757d;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  border-color: #007bff;
-  transition: background-color 0.3s, border-color 0.3s;
-}
-
-.btn-primary:hover {
-  background-color: #0056b3;
-  border-color: #004085;
+.btns .btn svg{
+  font-size: 21px;
 }
 
 #productsData .product-card picture img{
@@ -152,8 +145,6 @@ body {
   width: 100%;
   object-fit: contain;
 }
-
-
 
 @keyframes slide_In {
   from {
