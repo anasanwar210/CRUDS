@@ -21,7 +21,7 @@
       <div class="card-body">
         <div>
           <div class="form-floating mb-3">
-            <input type="text" class="change form-control" id="productNameInput" placeholder="Product Name">
+            <input oninput="validateProductName()" type="text" class="change form-control" id="productNameInput" placeholder="Product Name">
             <label for="productNameInput">Product Name</label>
           </div>
           <div class="form-floating mb-3">
@@ -58,7 +58,7 @@
       </div>
       <div class="col-md-4 mb-2">
         <select oninput="getCategory()" id="selectCategory" class="form-select" aria-label="Default select example">
-          <option value="Choose Category">Select Category</option>
+          <option value="Choose Category" disabled>Select Category</option>
           <option value="all" selected id="all" class="opt">All</option>
         </select>
       </div>

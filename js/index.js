@@ -205,6 +205,15 @@ function getCategory() {
   document.getElementById("productsData").innerHTML = products;
 }
 
+function validateProductName() {
+  let re = /^[A-Z][a-z]{4,8}/;
+  if (re.test(productNameInput.value)) {
+    console.log("Match");
+  } else {
+    console.log("No");
+  }
+}
+
 /*
 =================================
 - Important Function
