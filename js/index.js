@@ -110,6 +110,7 @@ function display() {
 function updateItem(index) {
   productIndex = index;
   beforeDeleted = productsContainer[index];
+  console.log(beforeDeleted.image);
   productNameInput.value = productsContainer[index].productName;
   productPriceInput.value = productsContainer[index].productPrice;
   productCatInput.value = productsContainer[index].productCat;
