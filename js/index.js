@@ -142,6 +142,15 @@ function confirmUpdate() {
   getCategory();
 }
 
+function cancelUpdate() {
+  productsContainer.splice(productIndex, 0, beforeDeleted);
+  display();
+  clearInputs();
+  confirmUpdateBtn.classList.add("d-none");
+  cancelUpdateBtn.classList.add("d-none");
+  addItemBtn.classList.remove("d-none");
+}
+
 // [ 5 ]
 function deleteItem(index) {
   productsContainer.splice(index, 1);
@@ -203,15 +212,6 @@ function getCategory() {
   }
 
   document.getElementById("productsData").innerHTML = products;
-}
-
-function validateProductName() {
-  let re = /^[A-Z][a-z]{4,8}/;
-  if (re.test(productNameInput.value)) {
-    console.log("Match");
-  } else {
-    console.log("No");
-  }
 }
 
 /*
