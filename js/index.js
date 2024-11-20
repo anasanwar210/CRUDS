@@ -331,7 +331,7 @@ function visibleUpdateButton(input) {
 
 function validateInputs(input, inputMsgId) {
   let re = {
-    productName: /^[A-Z][a-z0-9]{3,10}\s{0,1}[A-Z][a-z0-9]{1,10}$/,
+    productName: /^[A-z0-9]{3}( [A-z0-9]{1,})?/,
     productPrice: /^\d{2,5}$/,
     productCat: /^(tv|mobile|monitor|car|bicycle)$/i,
     image: /^.{1,}\.(jpg|jpeg|svg|png|webp)$/,
