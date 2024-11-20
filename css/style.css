@@ -115,6 +115,37 @@ body {
 
 /* 
 ===============================================
+          Start Last Product Delete
+===============================================
+*/
+
+#lastDelete{
+  position: fixed;
+  top: 10%;
+  left: -15.4%;
+  z-index: 10;
+  transition: 0.5s;
+}
+
+#lastDelete .deleted p{
+  font-size: 16px;
+}
+
+#lastDelete .icon :where(#visible,#hide){
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* 
+===============================================
+          End Last Product Delete
+===============================================
+*/
+
+/* 
+===============================================
                 Start Cards
 ===============================================
 */

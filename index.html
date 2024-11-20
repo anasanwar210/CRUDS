@@ -14,44 +14,101 @@
 </head>
 
 <body>
-  <div id="addNewItem" class="container mt-5">
+  <!-- 
+  ==================================
+  - Start Added New Product
+  ==================================
+  -->
+
+  <section id="addNewItem" class="container mt-5">
     <h2 class="text-center mb-4 text-primary">CRUDS System</h2>
     <div class="card shadow-sm rounded">
       <div class="card-header bg-success text-white"> Add New Item </div>
       <div class="card-body">
         <div>
           <div class="form-floating mb-3">
-            <input oninput="validateProductName()" type="text" class="change form-control" id="productNameInput" placeholder="Product Name">
-            <label for="productNameInput">Product Name</label>
+            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this ,'invalidNameMsg')" type="text" class="change form-control"
+              id="productName" placeholder="Product Name">
+            <label for="productName">Product Name</label>
+            <p id="invalidNameMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="form-floating mb-3">
-            <input type="number" class="change form-control" id="productPriceInput" placeholder="Product Price">
-            <label for="productPriceInput">Product Price</label>
+            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this , 'invalidPriceMsg')" type="number" class="change form-control" id="productPrice"
+              placeholder="Product Price">
+            <label for="productPrice">Product Price</label>
+            <p id="invalidPriceMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="form-floating mb-3">
-            <input type="text" class="change form-control" id="productCatInput" placeholder="Product Category">
-            <label for="productCatInput">Product Category</label>
+            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this ,'invalidCategoryMsg')" type="text" class="change form-control" id="productCat"
+              placeholder="Product Category">
+            <label for="productCat">Product Category</label>
+            <p id="invalidCategoryMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="mb-3">
-            <label for="imageInput" class="form-label">Product Image</label>
-            <input class="change form-control" type="file" id="imageInput">
+            <label for="image" class="form-label">Product Image</label>
+            <input onchange="visibleUpdateButton(this)" onchange="validateInputs(this, 'invalidImgMsg')" class="change form-control" type="file" id="image">
+            <p id="invalidImgMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="form-floating mb-3">
-            <textarea class="change form-control" id="productDescInput" placeholder="Product Description"></textarea>
-            <label for="productDescInput">Description</label>
+            <textarea oninput="visibleUpdateButton(this)" onblur="validateInputs(this,'invalidDescMsg')" class="change form-control" id="productDesc"
+              placeholder="Product Description"></textarea>
+            <label for="productDesc">Description</label>
+            <p id="invalidDescMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <button id="confirmUpdate" type="submit" class="btn btn-warning py-2 mb-2 w-100 d-none"
-            onclick="confirmUpdate()">Update Item</button>
-            <button id="cancelUpdateBtn" type="submit" class="btn btn-danger py-2 mb-2 w-100 d-none"
+            onclick="confirmUpdate()" disabled>Update Item</button>
+          <button id="cancelUpdateBtn" type="submit" class="btn btn-danger py-2 mb-2 w-100 d-none"
             onclick="cancelUpdate()">Cancel</button>
           <button id="addItem" type="submit" class="btn btn-success py-2 w-100" onclick="addProduct()">Add
             Item</button>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="container">
+  <!-- 
+  ==================================
+  - End Added New Product
+  ==================================
+  -->
+
+  <!-- 
+  ==================================
+  - Start Last Product Delete
+  ==================================
+  -->
+
+  <!-- <div id="lastDelete" class="d-flex justify-content-center align-items-center">
+    <div class="deleted text-center p-3 bg-white rounded-3">
+      <i class="fa-solid fa-trash text-danger"></i>
+      <p>You Have One Product <br> In Your Trash</p>
+      <button onclick="viewProduct()" class="btn btn-success">View</button>
+    </div>
+    <div class="icon">
+      <div onclick="visibleDeleteBox()" id="visible"
+        class="bg-white rounded-pill text-black d-flex justify-content-center align-items-center">
+        <i id="visibleLastDelete" class="fa-solid fa-chevron-right"></i>
+      </div>
+      <div onclick="hideDeleteBox()" id="hide"
+        class="bg-white rounded-pill text-black d-flex justify-content-center align-items-center d-none">
+        <i id="hideLastDelete" class="fa-solid fa-chevron-left"></i>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- 
+  ==================================
+  - Start Last Product Delete
+  ==================================
+  -->
+
+  <!-- 
+  ==================================
+  - Start Search
+  ==================================
+  -->
+
+  <section class="container">
     <div class="row my-5 m-auto">
       <div class="col-md-8 mb-2">
         <input type="text" class="form-control" id="searchInput" placeholder="Search" oninput="search()">
@@ -63,8 +120,21 @@
         </select>
       </div>
     </div>
-  </div>
-  <div id="itemsList" class="container">
+  </section>
+
+  <!-- 
+  ==================================
+  - End Search
+  ==================================
+  -->
+
+  <!-- 
+  ==================================
+  - Start Display Products
+  ==================================
+  -->
+
+  <section id="itemsList" class="container">
     <div class="mt-4">
       <h3 class="text-secondary">Items List</h3>
       <div id="itemList">
@@ -72,9 +142,17 @@
         </div>
       </div>
     </div>
-    <script src="js/all.min.js"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/index.js"></script>
+  </section>
+
+  <!-- 
+  ==================================
+  - End Display Products
+  ==================================
+  -->
+  <script src="js/all.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>

@@ -1,10 +1,10 @@
-// alert("Fix Search When No Items => search method()")
+let productNameInput = document.getElementById("productName"),
+  productPriceInput = document.getElementById("productPrice"),
+  productCatInput = document.getElementById("productCat"),
+  productDescInput = document.getElementById("productDesc"),
+  imageInput = document.getElementById("image");
 
-let productNameInput = document.getElementById("productNameInput"),
-  productPriceInput = document.getElementById("productPriceInput"),
-  productCatInput = document.getElementById("productCatInput"),
-  productDescInput = document.getElementById("productDescInput"),
-  imageInput = document.getElementById("imageInput");
+var errorMsg;
 
 let searchInput = document.getElementById("searchInput"),
   selectCategory = document.getElementById("selectCategory"),
@@ -14,12 +14,13 @@ let confirmUpdateBtn = document.getElementById("confirmUpdate"),
   cancelUpdateBtn = document.getElementById("cancelUpdateBtn"),
   addItemBtn = document.getElementById("addItem");
 
-let allInputs = document.querySelectorAll("input.change");
+let visibleLastDelete = document.getElementById("visible"),
+  hideLastDelete = document.getElementById("hide"),
+  deletedBox = document.getElementById("lastDelete");
 
-let productIndex, beforeDeleted;
+var productIndex, beforeUpdate, beforeDeleted;
 
 let productsContainer = [];
-
 if (localStorage.getItem("products") !== null) {
   productsContainer = JSON.parse(localStorage.getItem("products"));
   appendCategory();
@@ -28,8 +29,8 @@ if (localStorage.getItem("products") !== null) {
 
 function appendProductCard(i) {
   return `
-    <div class="col-md-6 col-lg-4 align-items-center py-4">
-    <div class="card product-card shadow-lg rounded">
+    <div class="col-md-6 col-lg-4 align-items-center py-4" style="user-select: none;">
+    <div class="card product-card shadow-lg rounded" style="user-select: text;">
               <picture>
                 <img src="${productsContainer[i].image}" class="card-img-top w-100" alt="Product Image">
               </picture>
@@ -56,36 +57,46 @@ function appendProductCard(i) {
 
 // [ 1 ]
 function addProduct() {
-  let product = {
-    productName: productNameInput.value
-      .trim()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-      .join(" "),
-    productPrice: productPriceInput.value
-      .trim()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" "),
-    productCat: productCatInput.value
-      .trim()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" "),
-    productDesc: productDescInput.value
-      .trim()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" "),
-    image: imageInput.files[0]
-      ? `images/${imageInput.files[0]?.name}`
-      : `images/1.jpg`,
-  };
-  productsContainer.push(product);
-  localStorage.setItem("products", JSON.stringify(productsContainer));
-  clearInputs();
-  display();
-  location.reload();
+  if (
+    validateInputs(productNameInput, "invalidNameMsg") &&
+    validateInputs(productPriceInput, "invalidPriceMsg") &&
+    validateInputs(productCatInput, "invalidCategoryMsg") &&
+    validateInputs(imageInput, "invalidImgMsg") &&
+    validateInputs(productDescInput, "invalidDescMsg")
+  ) {
+    let product = {
+      productName: productNameInput.value
+        .trim()
+        .split(" ")
+        .map(
+          (word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(" "),
+      productPrice: productPriceInput.value
+        .trim()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      productCat: productCatInput.value
+        .trim()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      productDesc: productDescInput.value
+        .trim()
+        .split(" ")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" "),
+      image: imageInput.files[0]
+        ? `images/${imageInput.files[0]?.name}`
+        : `images/1.jpg`,
+    };
+    productsContainer.push(product);
+    localStorage.setItem("products", JSON.stringify(productsContainer));
+    clearInputs();
+    display();
+    location.reload();
+  }
 }
 
 // [ 2 ]
@@ -109,8 +120,7 @@ function display() {
 // [ 4 ]
 function updateItem(index) {
   productIndex = index;
-  beforeDeleted = productsContainer[index];
-  console.log(beforeDeleted.image);
+  beforeUpdate = productsContainer[index];
   productNameInput.value = productsContainer[index].productName;
   productPriceInput.value = productsContainer[index].productPrice;
   productCatInput.value = productsContainer[index].productCat;
@@ -125,26 +135,35 @@ function updateItem(index) {
 
 // [ 4.1 ]
 function confirmUpdate() {
-  productsContainer.splice(productIndex, 0, beforeDeleted);
-  productsContainer[productIndex].productName = productNameInput.value;
-  productsContainer[productIndex].productPrice = productPriceInput.value;
-  productsContainer[productIndex].productCat = productCatInput.value;
-  productsContainer[productIndex].productDesc = productDescInput.value;
-  productsContainer[productIndex].image = imageInput.files[0]
-    ? `images/${imageInput.files[0]?.name}`
-    : `images/1.jpg`;
-  localStorage.setItem("products", JSON.stringify(productsContainer));
-  display();
-  clearInputs();
-  confirmUpdateBtn.classList.add("d-none");
-  cancelUpdateBtn.classList.add("d-none");
-  addItemBtn.classList.remove("d-none");
-  location.reload();
-  getCategory();
+  if (
+    validateInputs(productNameInput, "invalidNameMsg") &&
+    validateInputs(productPriceInput, "invalidPriceMsg") &&
+    validateInputs(productCatInput, "invalidCategoryMsg") &&
+    validateInputs(imageInput, "invalidImgMsg") &&
+    validateInputs(productDescInput, "invalidDescMsg")
+  ) {
+    productsContainer.splice(productIndex, 0, beforeUpdate);
+    productsContainer[productIndex].productName = productNameInput.value;
+    productsContainer[productIndex].productPrice = productPriceInput.value;
+    productsContainer[productIndex].productCat = productCatInput.value;
+    productsContainer[productIndex].productDesc = productDescInput.value;
+    productsContainer[productIndex].image = imageInput.files[0]
+      ? `images/${imageInput.files[0]?.name}`
+      : `images/1.jpg`;
+    localStorage.setItem("products", JSON.stringify(productsContainer));
+    display();
+    clearInputs();
+    confirmUpdateBtn.classList.add("d-none");
+    cancelUpdateBtn.classList.add("d-none");
+    addItemBtn.classList.remove("d-none");
+    location.reload();
+    getCategory();
+  }
 }
 
+// [ 4.2 ]
 function cancelUpdate() {
-  productsContainer.splice(productIndex, 0, beforeDeleted);
+  productsContainer.splice(productIndex, 0, beforeUpdate);
   display();
   clearInputs();
   confirmUpdateBtn.classList.add("d-none");
@@ -154,11 +173,43 @@ function cancelUpdate() {
 
 // [ 5 ]
 function deleteItem(index) {
-  productsContainer.splice(index, 1);
-  localStorage.setItem("products", JSON.stringify(productsContainer));
-  display();
-  location.reload();
-  getCategory();
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger",
+    },
+    buttonsStyling: "mx-4",
+  });
+  swalWithBootstrapButtons
+    .fire({
+      title: "Are you sure?",
+      height: "100vh",
+      text: "You won't be able to revert this!",
+      imageWidth: "80%",
+      imageUrl: productsContainer[index].image,
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it",
+      cancelButtonText: "No, cancel",
+      backdrop: `
+    rgba(0,0,123,0.4)
+    left top
+    no-repeat
+  `,
+      reverseButtons: false,
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        localStorage.setItem(
+          "productsDeleted",
+          JSON.stringify(productsContainer[index])
+        );
+        productsContainer.splice(index, 1);
+        localStorage.setItem("products", JSON.stringify(productsContainer));
+        display();
+        location.reload();
+        getCategory();
+      }
+    });
 }
 
 // [ 6 ]
@@ -184,7 +235,6 @@ function search() {
         </div>
           `;
   }
-
   document.getElementById("productsData").innerHTML = products;
 }
 
@@ -211,22 +261,93 @@ function getCategory() {
       products += appendProductCard(i);
     }
   }
-
   document.getElementById("productsData").innerHTML = products;
 }
 
 /*
 =================================
-- Important Function
-- To Custom Disabled Confirm BTN
+- Toggle Between Disabled { true OR false } For Confirm Update 
 =================================
 */
 
-// function visibleUpdateButton(input) {
-//   console.log(beforeDeleted.productName);
-//   if (input.value !== beforeDeleted.productName) {
-//     confirmUpdateBtn.disabled = false;
-//   } else {
-//     confirmUpdateBtn.disabled = true;
-//   }
+function visibleUpdateButton(input) {
+  if (addItemBtn.classList.contains("d-none")) {
+    if (input.value !== beforeUpdate[input.id]) {
+      confirmUpdateBtn.disabled = false;
+    } else {
+      confirmUpdateBtn.disabled = true;
+    }
+  }
+}
+
+/*
+=================================
+- Toggle Between Show And Hide Delete Box
+=================================
+*/
+
+// function visibleDeleteBox() {
+//   deletedBox.style.left = "0";
+//   hideLastDelete.classList.remove("d-none");
+//   visibleLastDelete.classList.add("d-none");
 // }
+
+// function hideDeleteBox() {
+//   deletedBox.style.left = "-15.4%";
+//   hideLastDelete.classList.add("d-none");
+//   visibleLastDelete.classList.remove("d-none");
+// }
+
+// function viewProduct() {
+//   const swalWithBootstrapButtons = Swal.mixin({
+//     customClass: {
+//       confirmButton: "btn btn-success",
+//       cancelButton: "btn btn-danger",
+//     },
+//     buttonsStyling: "mx-4",
+//   });
+//   swalWithBootstrapButtons
+//     .fire({
+//       title: "Muhammed Essam Bek",
+//       height: "100vh",
+//       text: "You won't be able to revert this!",
+//       imageWidth: "80%",
+//       showCancelButton: true,
+//       confirmButtonText: "Yes, delete it",
+//       cancelButtonText: "No, cancel",
+//       backdrop: `
+//     rgba(0,0,123,0.4)
+//     left top
+//     no-repeat
+//   `,
+//       reverseButtons: false,
+//     })
+//     .then((result) => {
+//       if (result.isConfirmed) {
+//         console.log("mo");
+//       }
+//     });
+// }
+
+function validateInputs(input, inputMsgId) {
+  let re = {
+    productName: /^[A-Z][a-z0-9]{3,10}\s{0,1}[A-Z][a-z0-9]{1,10}$/,
+    productPrice: /^\d{2,5}$/,
+    productCat: /^(tv|mobile|monitor|car|bicycle)$/i,
+    image: /^.{1,}\.(jpg|jpeg|svg|png|webp)$/,
+    productDesc: /^.{3,}$/m,
+  };
+  errorMsg = document.getElementById(inputMsgId);
+  console.log(errorMsg);
+  if (re[input.id].test(input.value)) {
+    input.classList.add("is-valid");
+    input.classList.remove("is-invalid");
+    errorMsg.classList.add("d-none");
+    return true;
+  } else {
+    input.classList.add("is-invalid");
+    input.classList.remove("is-valid");
+    errorMsg.classList.remove("d-none");
+    return false;
+  }
+}
