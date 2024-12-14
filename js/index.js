@@ -1,6 +1,3 @@
-// alert(
-//   ""
-// );
 const test = document.getElementById("test");
 if (!localStorage.getItem('popupSeen')) {
   Swal.fire({
