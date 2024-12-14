@@ -8,7 +8,7 @@ if (!localStorage.getItem('popupSeen')) {
     confirmButtonText: 'Yes',
     cancelButtonText: 'No',
   }).then((result) => {
-    if (result.isConfirmed) {
+    if (!result.isConfirmed) {
       localStorage.setItem('popupSeen', 'true');
     }
   });
