@@ -331,4 +331,25 @@ function visibleUpdateButton(input) {
 //     });
 // }
 
-form-floating
+function validateInputs(input, inputMsgId) {
+  let re = {
+    productName: /^[A-Z][a-z0-9]{3,10}\s{0,1}[A-Z][a-z0-9]{1,10}$/,
+    productPrice: /^\d{2,5}$/,
+    productCat: /^(tv|mobile|monitor|car|bicycle)$/i,
+    image: /^.{1,}\.(jpg|jpeg|svg|png|webp)$/,
+    productDesc: /^.{3,}$/m,
+  };
+  errorMsg = document.getElementById(inputMsgId);
+  console.log(errorMsg);
+  if (re[input.id].test(input.value)) {
+    input.classList.add("is-valid");
+    input.classList.remove("is-invalid");
+    errorMsg.classList.add("d-none");
+    return true;
+  } else {
+    input.classList.add("is-invalid");
+    input.classList.remove("is-valid");
+    errorMsg.classList.remove("d-none");
+    return false;
+  }
+}
