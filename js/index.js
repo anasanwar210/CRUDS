@@ -1,7 +1,21 @@
-alert(
-  "There's an issue with the image because its path is set to static, which is why it's not working."
-);
+// alert(
+//   ""
+// );
 const test = document.getElementById("test");
+if (!localStorage.getItem('popupSeen')) {
+  Swal.fire({
+    title: `There's an issue with the image because its path is set to static, which is why it's not working.`,
+    text: `Would you like to see this page again?`,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Yes',
+    cancelButtonText: 'No',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      localStorage.setItem('popupSeen', 'true');
+    }
+  });
+}
 
 let productNameInput = document.getElementById("productName"),
   productPriceInput = document.getElementById("productPrice"),
