@@ -76,6 +76,16 @@ body {
   border-color: #2e7d32;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
