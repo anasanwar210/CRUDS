@@ -1,4 +1,7 @@
-alert("There's an issue with the image because its path is set to static, which is why it's not working.")
+alert(
+  "There's an issue with the image because its path is set to static, which is why it's not working."
+);
+const test = document.getElementById("test");
 
 let productNameInput = document.getElementById("productName"),
   productPriceInput = document.getElementById("productPrice"),
@@ -91,7 +94,7 @@ function addProduct() {
         .join(" "),
       image: imageInput.files[0]
         ? `images/${imageInput.files[0]?.name}`
-        : `images/1.jpg`,
+        : `${test.classList.remove("d-none")}`,
     };
     productsContainer.push(product);
     localStorage.setItem("products", JSON.stringify(productsContainer));
