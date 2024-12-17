@@ -1,18 +1,19 @@
-const test = document.getElementById("test");
-if (!localStorage.getItem('popupSeen')) {
+if (!localStorage.getItem("popupSeen")) {
   Swal.fire({
     title: `There's an issue with the image because its path is set to static, which is why it's not working.`,
     text: `Would you like to see this page again?`,
-    icon: 'question',
+    icon: "question",
     showCancelButton: true,
-    confirmButtonText: 'Yes',
-    cancelButtonText: 'No',
+    confirmButtonText: "Yes",
+    cancelButtonText: "No",
   }).then((result) => {
     if (!result.isConfirmed) {
-      localStorage.setItem('popupSeen', 'true');
+      localStorage.setItem("popupSeen", "true");
     }
   });
 }
+
+let isUpdating = false;
 
 let productNameInput = document.getElementById("productName"),
   productPriceInput = document.getElementById("productPrice"),
@@ -135,12 +136,18 @@ function display() {
 
 // [ 4 ]
 function updateItem(index) {
+  isUpdating = true;
   productIndex = index;
   beforeUpdate = productsContainer[index];
   productNameInput.value = productsContainer[index].productName;
   productPriceInput.value = productsContainer[index].productPrice;
   productCatInput.value = productsContainer[index].productCat;
   productDescInput.value = productsContainer[index].productDesc;
+  const imagePreview = document.getElementById("imagePreview");
+  if (imagePreview) {
+    imagePreview.src = productsContainer[index].image;
+    imagePreview.classList.remove("d-none");
+  }
   productsContainer.splice(index, 1);
   display();
   confirmUpdateBtn.classList.remove("d-none");
@@ -158,14 +165,19 @@ function confirmUpdate() {
     validateInputs(imageInput, "invalidImgMsg") &&
     validateInputs(productDescInput, "invalidDescMsg")
   ) {
+    isUpdating = false;
     productsContainer.splice(productIndex, 0, beforeUpdate);
     productsContainer[productIndex].productName = productNameInput.value;
     productsContainer[productIndex].productPrice = productPriceInput.value;
     productsContainer[productIndex].productCat = productCatInput.value;
     productsContainer[productIndex].productDesc = productDescInput.value;
-    productsContainer[productIndex].image = imageInput.files[0]
-      ? `images/${imageInput.files[0]?.name}`
-      : `images/1.jpg`;
+    if (imageInput.files[0]) {
+      productsContainer[
+        productIndex
+      ].image = `images/${imageInput.files[0].name}`;
+    } else {
+      productsContainer[productIndex].image = beforeUpdate.image;
+    }
     localStorage.setItem("products", JSON.stringify(productsContainer));
     display();
     clearInputs();
@@ -179,6 +191,7 @@ function confirmUpdate() {
 
 // [ 4.2 ]
 function cancelUpdate() {
+  isUpdating = false;
   productsContainer.splice(productIndex, 0, beforeUpdate);
   display();
   clearInputs();
@@ -353,6 +366,9 @@ function validateInputs(input, inputMsgId) {
     image: /^.{1,}\.(jpg|jpeg|svg|png|webp)$/,
     productDesc: /^.{3,}$/m,
   };
+  if (isUpdating && input.id === "image") {
+    return true;
+  }
   errorMsg = document.getElementById(inputMsgId);
   console.log(errorMsg);
   if (re[input.id].test(input.value)) {

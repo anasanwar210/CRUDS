@@ -29,31 +29,36 @@
       <div class="card-body">
         <div>
           <div class="form-floating mb-3">
-            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this ,'invalidNameMsg')" type="text" class="change form-control"
-              id="productName" placeholder="Product Name">
+            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this ,'invalidNameMsg')" type="text"
+              class="change form-control" id="productName" placeholder="Product Name">
             <label for="productName">Product Name</label>
             <p id="invalidNameMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="form-floating mb-3">
-            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this , 'invalidPriceMsg')" type="number" class="change form-control" id="productPrice"
-              placeholder="Product Price">
+            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this , 'invalidPriceMsg')" type="number"
+              class="change form-control" id="productPrice" placeholder="Product Price">
             <label for="productPrice">Product Price</label>
             <p id="invalidPriceMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="form-floating mb-3">
-            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this ,'invalidCategoryMsg')" type="text" class="change form-control" id="productCat"
-              placeholder="Product Category">
+            <input oninput="visibleUpdateButton(this)" onblur="validateInputs(this ,'invalidCategoryMsg')" type="text"
+              class="change form-control" id="productCat" placeholder="Product Category">
             <label for="productCat">Product Category</label>
             <p id="invalidCategoryMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="mb-3">
             <label for="image" class="form-label">Product Image</label>
-            <input onchange="visibleUpdateButton(this)" onchange="validateInputs(this, 'invalidImgMsg')" class="change form-control" type="file" id="image">
+            <div>
+              <img id="imagePreview" class="d-none" style="width: 100px; height: 100px; object-fit: cover;"
+                alt="Image Preview" />
+            </div>
+            <input onchange="visibleUpdateButton(this)" onchange="validateInputs(this, 'invalidImgMsg')"
+              class="change form-control" type="file" id="image">
             <p id="invalidImgMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
           <div class="form-floating mb-3">
-            <textarea oninput="visibleUpdateButton(this)" onblur="validateInputs(this,'invalidDescMsg')" class="change form-control" id="productDesc"
-              placeholder="Product Description"></textarea>
+            <textarea oninput="visibleUpdateButton(this)" onblur="validateInputs(this,'invalidDescMsg')"
+              class="change form-control" id="productDesc" placeholder="Product Description"></textarea>
             <label for="productDesc">Description</label>
             <p id="invalidDescMsg" class="alert alert-danger my-1 d-none">!! Enter It Valid !!</p>
           </div>
