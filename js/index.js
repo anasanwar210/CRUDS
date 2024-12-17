@@ -360,10 +360,10 @@ function visibleUpdateButton(input) {
 
 function validateInputs(input, inputMsgId) {
   let re = {
-    productName: /^[A-Z][a-zA-Z0-9]*( [A-Z0-9][a-z0-9]*)*$/,
+    productName: /^[a-zA-Z0-9]+( [A-z0-9]*)*$/,
     productPrice: /^\d{2,5}$/,
-    productCat: /^([A-Z][a-zA-Z0-9]*)( [A-Z][a-z0-9]*)*$/,
-    image: /^.{1,}\.(jpg|jpeg|svg|png|webp)$/,
+    productCat: /^[a-zA-Z0-9]+( [A-z0-9]*)*$/,
+    image: /^.{1,}\.(jpg|jpeg|svg|png|webp|avif)$/,
     productDesc: /^.{3,}$/m,
   };
   if (isUpdating && input.id === "image") {
